@@ -7,7 +7,7 @@ import {getCurrentDoorState, getTargetDoorState} from "./DoorStateExtension";
 
 var Characteristic;
 
-export default class DoorSensorPort extends GPIOPort {
+export class DoorSensorPort extends GPIOPort {
 	private service: any;
 	private log: any;
 	private closedSensorValue;

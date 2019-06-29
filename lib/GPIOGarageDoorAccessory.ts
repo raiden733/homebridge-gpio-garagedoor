@@ -7,12 +7,12 @@ import Promise = require("bluebird");
 import GPIO = require("onoff");
 import {getCurrentDoorStateDescription} from "./DoorStateExtension";
 import {changeBase} from "./Runtime";
-import DoorSensorPort from "./DoorSensorPort";
-import SwitchPort from "./SwitchPort";
+import {DoorSensorPort} from "./DoorSensorPort";
+import {SwitchPort} from "./SwitchPort";
 
 var Accessory, Service, Characteristic, uuid;
 
-export default class GPIOGarageDoorAccessory {
+export class GPIOGarageDoorAccessory {
 	private log;
 	private name: string;
 	private doorSensor: DoorSensorPort;
