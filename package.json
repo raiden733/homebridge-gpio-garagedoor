@@ -28,5 +28,8 @@
     "@types/bluebird": "^3.5.27",
     "@types/onoff": "^3.2.1",
     "typescript": "^1.8"
+  },
+  "scripts": {
+    "prepublish": "node node_modules/typescript/bin/tsc --module commonjs index.ts -t ES6"
   }
 }
