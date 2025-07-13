@@ -23,6 +23,7 @@ export class GPIOGarageDoorAccessory {
 	private getService: (any) => any;
 	private services: any[];
 	private uuid_base: string;
+	private garagedoorAccessory: any;
 
 	static init(exportTypes) {
 		Accessory = exportTypes.Accessory;
@@ -36,12 +37,12 @@ export class GPIOGarageDoorAccessory {
 	constructor(log, config) {
 		var name = config["name"];
 		var id = uuid.generate('gpio-garagedoor.' + (config['id'] || this.name));
-		Accessory.call(this, name, id);
+		this.garagedoorAccessory = new Accessory(name, id);
 		this.uuid_base = id;
 		this.name = name;
 		this.log = log;
 
-		var garageDoorOpener = this.addService(Service.GarageDoorOpener);
+		var garageDoorOpener = this.garagedoorAccessory.addService(Service.GarageDoorOpener);
 
 		var doorSensorPin = config["doorSensorPin"];
 		log("Door Sensor Pin: " + doorSensorPin);
@@ -64,11 +65,11 @@ export class GPIOGarageDoorAccessory {
 				log("Garage Door state changed to " + getCurrentDoorStateDescription(change.newValue));
 			});
 
-		this.getService(Service.AccessoryInformation)
+		this.garagedoorAccessory.getService(Service.AccessoryInformation)
 			.setCharacteristic(Characteristic.Model, "GPIO Garage Door");
 	}
 
 	getServices(): any {
-		return this.services;
+		return this.garagedoorAccessory.services;
 	};
 }

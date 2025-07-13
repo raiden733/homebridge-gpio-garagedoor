@@ -26,10 +26,16 @@ export type GPIOEdge =
 	'falling' |
 	'both';
 
+export type Options = {
+    	debounceTimeout?: number,
+    	activeLow?: boolean,
+    	reconfigureDirection?: boolean,
+}
+
 export class GPIOPort extends Gpio {
 
-	constructor(gpio: number, direction: GPIODirection, edge?: GPIOEdge) {
-		super(gpio, direction, edge);
+	constructor(gpio: number, direction: GPIODirection, edge?: GPIOEdge, options?: Options) {
+		super(gpio, direction, edge, options);
 		var self = this;
 		process.on('SIGINT', function () {
 			self.unexport();
