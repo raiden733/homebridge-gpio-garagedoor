@@ -19,11 +19,11 @@ export class SwitchPort extends GPIOPort {
 
 	constructor(pin, service, log, doorSensor: DoorSensorPort, doorOpensInSeconds) {
 		super(pin, 'out', 'none', {activeLow: true});
+		this.writeAsync(GPIOState.Off);
 		this.service = service;
 		this.log = log;
 		this.isOperating = false;
 		var self = this;
-		self.writeAsync(GPIOState.Off);
 		var targetState = service.getCharacteristic(Characteristic.TargetDoorState);
 		targetState.on('set', function (state, callback) {
 			var curState = getCurrentDoorState(service);
